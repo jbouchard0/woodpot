@@ -12,7 +12,7 @@ from solid.utils import *
 
 SEGMENTS = 75
 
-def calcDimensions(radius, height, wall_thickness, sides, layers, roundEdges, leveledTop, overlap):
+def calcDimensions(radius=25, height=35, wall_thickness=7, sides=6, layers=5, roundEdges=False, leveledTop=True, overlap=1.25):
     blockLength = 2*radius*tan(math.pi/sides)
     blockWidth = wall_thickness
     blockHeight = height/layers/2
@@ -41,7 +41,7 @@ def calcDimensions(radius, height, wall_thickness, sides, layers, roundEdges, le
     excess = []
     excessOuter = (cube([radius*4, VertexToVertex*4, height*2], center=True))
     for e in range(math.ceil(sides)):
-        excessInner = rotate(blockAngle*e-90)(cube([radius*2+blockWidth, VertexToVertex*2, height*3], center=True))
+        excessInner = rotate(blockAngle*e-90)(cube([radius*2+blockWidth*overlap, VertexToVertex*2, height*3], center=True))
         excess = excessOuter - excessInner
         block = block - excess
         #excess = excessInner+excess
@@ -71,17 +71,11 @@ def calcDimensions(radius, height, wall_thickness, sides, layers, roundEdges, le
         block = block - outerCyl
     return block
 
-def assembly():
-    block = calcDimensions(radius=20,height=30,wall_thickness=5,sides=6,layers=6, roundEdges=True, leveledTop=True, overlap = 1.05)
-    a = union()(block)
-
-    return a
-
+woodpot = calcDimensions(radius=20,height=30,wall_thickness=5,sides=6,layers=5,roundEdges=True, leveledTop=False,overlap=1.0)
 if __name__ == '__main__':
-    a = assembly()
     out_dir = sys.argv[1] if len(sys.argv) > 1 else os.curdir
     file_out = os.path.join(out_dir, 'woodpot.scad')
 
     print("%(__file__)s: SCAD file written to: \n%(file_out)s" % vars())
 
-    scad_render_to_file(a, file_out, file_header='$fn = %s;' % SEGMENTS, include_orig_code=True)
+    scad_render_to_file(woodpot, file_out, file_header='$fn = %s;' % SEGMENTS, include_orig_code=True)

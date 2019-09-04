@@ -56,6 +56,26 @@ Setting it to "True" would result in this:
 woodpot = calcDimensions(radius=20,height=30,wall_thickness=5,sides=6,layers=5,roundEdges=True, leveledTop=True,overlap=1.0)
 ```
 
+# Implementation
+Here are my results:
+
+<img src="https://i.imgur.com/JZg4Sd4.jpg" width="250"></img>   <img src="https://i.imgur.com/F8l19BA.jpg" width="250"></img>   <img src="https://i.imgur.com/GcE4kJn.jpg" width="250"></img>
+
+(1) Printing in progress. Using a roll of wood filament from amazon. Seller said it was 30% wood and 70% PLA. It semlls just like real wood as it prints.
+
+(2) After removing all the supports, I started to apply the wood filler to any print imperfections I had. Totally not necessary, I just didnt have my print settings all dialled in for wood filament at the time.
+
+(3) After a light wood stain. The stain looks a whole lot better in real life for some reason. Overall however, pretty happy with this project and what I ended up with.
+
+# Known Bugs
+When I originally wrote this code, I was one my way to Kyoto from Tokyo, about a 2.5 hour trip on the Shinkasen. I wasn't planning on releasing it as it was just for my own personal use to generated maybe 3 or 4 pots that I could print. Because of this, there are many bugs with this program that I will eventually work out.
+
+* Floor generation code for pots with 8 or more sides isn't inline with the walls
+* Large overlaps > 3 will often break the model
+* 3 sided triangular shaped pots don't generate a proper floor
+* Many more
+
+As it is, I recommend that if you're going to use this program, stick to 4-8 sided pots and you won't have any issues.
 
 ## Built With
 
